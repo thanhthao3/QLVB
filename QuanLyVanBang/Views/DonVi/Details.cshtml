@@ -1,0 +1,22 @@
+﻿@model QuanLyVanBang.Models.DonVi
+
+@{
+    ViewData["Title"] = "Chi tiết đơn vị";
+}
+
+<h1>Chi tiết đơn vị</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.TenDonVi)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.TenDonVi)</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.KiHieu)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.KiHieu)</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.MoTa)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MoTa)</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaDonVi" class="btn btn-warning">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

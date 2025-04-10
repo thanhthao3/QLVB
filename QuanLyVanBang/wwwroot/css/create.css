@@ -1,0 +1,147 @@
+﻿/* Định dạng tổng thể */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f27922, #ff9f40); /* Gradient cam */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Căn giữa form trong row */
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Định dạng khung chứa form */
+.col-md-6 {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px; /* Bo góc mềm mại */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    transition: 0.3s ease-in-out;
+    border-left: 6px solid #f27922; /* Viền trái tạo điểm nhấn */
+}
+
+    /* Hiệu ứng khi hover vào form */
+    .col-md-6:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+/* Tiêu đề form */
+h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #f27922; /* Màu cam nổi bật */
+    margin-bottom: 25px;
+    font-size: 26px;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+    /* Nhãn của input */
+    .form-group label {
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 6px;
+        display: block;
+        font-size: 14px;
+    }
+
+/* Ô nhập liệu */
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px; /* Bo góc ô nhập */
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+    background: #f8f9fa;
+}
+
+    /* Khi người dùng focus vào input */
+    .form-control:focus {
+        border-color: #f27922;
+        box-shadow: 0px 0px 10px rgba(242, 121, 34, 0.3);
+        outline: none;
+        background: #fff;
+    }
+
+/* Dropdown */
+select.form-control {
+    appearance: none;
+    cursor: pointer;
+}
+
+/* Hiển thị lỗi */
+.text-danger {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Nút */
+.btn {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Nút chính */
+.btn-primary {
+    background-color: #f27922;
+    color: white;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #d6651a;
+        transform: scale(1.05);
+    }
+
+/* Nút quay lại */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        transform: scale(1.05);
+    }
+
+/* Căn chỉnh khoảng cách giữa các nút */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .col-md-6 {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .d-flex {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,49 @@
+ @model QuanLyVanBang.Models.NguoiDung
+
+@{
+    ViewData["Title"] = "Chi tiết người dùng";
+}
+
+<h1>Chi tiết người dùng</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã người dùng</dt>
+        <dd class="col-sm-9">@Model.MaNguoiDung</dd>
+        
+        <dt class="col-sm-3">Họ tên</dt>
+        <dd class="col-sm-9">@Model.HoTen</dd>
+        
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+        
+        <dt class="col-sm-3">Ngày sinh</dt>
+        <dd class="col-sm-9">@Model.NgaySinh.ToString("dd/MM/yyyy")</dd>
+        
+        <dt class="col-sm-3">Giới tính</dt>
+        <dd class="col-sm-9">@Model.GioiTinh</dd>
+        
+        <dt class="col-sm-3">Địa chỉ</dt>
+        <dd class="col-sm-9">@Model.DiaChi</dd>
+        
+        <dt class="col-sm-3">Số điện thoại</dt>
+        <dd class="col-sm-9">@Model.SDT</dd>
+        
+        <dt class="col-sm-3">Mã chức vụ</dt>
+        <dd class="col-sm-9">@Model.MaChucVu</dd>
+        
+        <dt class="col-sm-3">Mã đơn vị</dt>
+        <dd class="col-sm-9">@Model.MaDonVi</dd>
+        
+        <dt class="col-sm-3">Tên đăng nhập</dt>
+        <dd class="col-sm-9">@Model.TenDangNhap</dd>
+        
+        <dt class="col-sm-3">Vai trò</dt>
+        <dd class="col-sm-9">@Model.Role</dd>
+    </dl>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.MaNguoiDung" class="btn btn-primary">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

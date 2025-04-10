@@ -1,0 +1,55 @@
+@* @model QuanLyVanBang.Models.VanBanDen
+
+@{
+    ViewData["Title"] = "Xóa văn bản đến";
+}
+
+<h1>Xóa văn bản đến</h1>
+
+<h3>Bạn có chắc chắn muốn xóa văn bản này?</h3>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã văn bản đến</dt>
+        <dd class="col-sm-9">@Model.MaVanBanDen</dd>
+        
+        <dt class="col-sm-3">Số hiệu văn bản</dt>
+        <dd class="col-sm-9">@Model.SoHieuVanBan</dd>
+        
+        <dt class="col-sm-3">Trích yếu</dt>
+        <dd class="col-sm-9">@Model.TrichYeu</dd>
+        
+        <dt class="col-sm-3">Mã loại văn bản</dt>
+        <dd class="col-sm-9">@Model.MaLoaiVanBan</dd>
+        
+        <dt class="col-sm-3">Độ khẩn</dt>
+        <dd class="col-sm-9">@Model.DoKhan</dd>
+        
+        <dt class="col-sm-3">Đơn vị gửi</dt>
+        <dd class="col-sm-9">@Model.DonViGui</dd>
+        
+        <dt class="col-sm-3">Tệp đính kèm</dt>
+        <dd class="col-sm-9">@Model.TepDinhKem</dd>
+        
+        <dt class="col-sm-3">Năm</dt>
+        <dd class="col-sm-9">@Model.Nam</dd>
+        
+        <dt class="col-sm-3">Ngày nhận</dt>
+        <dd class="col-sm-9">@Model.NgayNhan.ToString("dd/MM/yyyy HH:mm")</dd>
+        
+        <dt class="col-sm-3">Ghi chú</dt>
+        <dd class="col-sm-9">@Model.GhiChu</dd>
+        
+        <dt class="col-sm-3">Mã người nhận</dt>
+        <dd class="col-sm-9">@Model.MaNguoiNhan</dd>
+        
+        <dt class="col-sm-3">Trạng thái</dt>
+        <dd class="col-sm-9">@Model.TrangThai</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="MaVanBanDen" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>  *@

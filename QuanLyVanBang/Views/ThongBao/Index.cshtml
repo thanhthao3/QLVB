@@ -1,0 +1,149 @@
+@model IEnumerable<QuanLyVanBang.Models.ThongBao>
+@{
+    ViewData["Title"] = "Thông báo";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Thông báo của tôi</h2>
+        <div>
+            <button id="btnDanhDauTatCaDaXem" class="btn btn-outline-primary me-2">
+                <i class="fas fa-check-double"></i> Đánh dấu tất cả đã xem
+            </button>
+            <button id="btnXoaTatCa" class="btn btn-outline-danger">
+                <i class="fas fa-trash"></i> Xóa tất cả
+            </button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="list-group">
+                @foreach (var thongBao in Model)
+                {
+                    <div class="list-group-item list-group-item-action @(!thongBao.DaXem ? "active" : "")" data-id="@thongBao.MaThongBao">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">
+                                    @switch (thongBao.LoaiThongBao)
+                                    {
+                                        case 1:
+                                            <i class="fas fa-envelope text-primary"></i>
+                                            break;
+                                        case 2:
+                                            <i class="fas fa-check-circle text-success"></i>
+                                            break;
+                                        case 3:
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                            break;
+                                    }
+                                    @thongBao.NoiDung
+                                </h6>
+                                <small>@thongBao.NgayTao.ToString("dd/MM/yyyy HH:mm")</small>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                @if (!string.IsNullOrEmpty(thongBao.DuongDanVanBan))
+                                {
+                                    <a href="@thongBao.DuongDanVanBan" class="btn btn-sm btn-link me-2">
+                                        <i class="fas fa-external-link-alt"></i> Xem chi tiết
+                                    </a>
+                                }
+                                <button class="btn btn-sm btn-outline-danger btn-xoa-thongbao" data-id="@thongBao.MaThongBao">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (!Model.Any())
+                {
+                    <div class="text-center py-4">
+                        <i class="fas fa-bell-slash fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Bạn không có thông báo nào.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Đánh dấu đã xem khi click vào thông báo
+            $('.list-group-item').click(function (e) {
+                // Không đánh dấu đã xem nếu click vào nút xóa
+                if ($(e.target).closest('.btn-xoa-thongbao').length > 0) {
+                    return;
+                }
+
+                var thongBaoId = $(this).data('id');
+                var $item = $(this);
+
+                $.post('/ThongBao/DanhDauDaXem/' + thongBaoId, function (response) {
+                    if (response.success) {
+                        $item.removeClass('active');
+                        capNhatSoThongBao();
+                    }
+                });
+            });
+
+            // Đánh dấu tất cả đã xem
+            $('#btnDanhDauTatCaDaXem').click(function () {
+                $.post('/ThongBao/DanhDauTatCaDaXem', function (response) {
+                    if (response.success) {
+                        $('.list-group-item').removeClass('active');
+                        capNhatSoThongBao();
+                    }
+                });
+            });
+
+            // Xóa một thông báo
+            $('.btn-xoa-thongbao').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var thongBaoId = $(this).data('id');
+                var $item = $(this).closest('.list-group-item');
+
+                if (confirm('Bạn có chắc chắn muốn xóa thông báo này?')) {
+                    $.post('/ThongBao/XoaThongBao/' + thongBaoId, function (response) {
+                        if (response.success) {
+                            $item.fadeOut(300, function () {
+                                $(this).remove();
+                                if ($('.list-group-item').length === 0) {
+                                    location.reload();
+                                }
+                            });
+                            capNhatSoThongBao();
+                        }
+                    });
+                }
+            });
+
+            // Xóa tất cả thông báo
+            $('#btnXoaTatCa').click(function () {
+                if (confirm('Bạn có chắc chắn muốn xóa tất cả thông báo?')) {
+                    $.post('/ThongBao/XoaTatCaThongBao', function (response) {
+                        if (response.success) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        });
+
+        // Cập nhật số thông báo trên header
+        function capNhatSoThongBao() {
+            $.get('/ThongBao/LaySoThongBaoChuaXem', function (response) {
+                var count = response.count;
+                $('#thongBaoCount').text(count);
+                if (count > 0) {
+                    $('#thongBaoCount').show();
+                } else {
+                    $('#thongBaoCount').hide();
+                }
+            });
+        }
+    </script>
+} 

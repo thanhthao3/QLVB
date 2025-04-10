@@ -1,0 +1,49 @@
+﻿/* Tạo nền cam cho menu */
+.navbar {
+    background-color: #f27922;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+/* Căn chỉnh các mục menu */
+.navbar-nav .nav-item {
+    margin: 0 10px;
+}
+
+/* Định dạng text và icon trong menu */
+.navbar-nav .nav-link {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Tạo khoảng cách giữa icon và text */
+}
+
+    /* Hover hiệu ứng */
+    .navbar-nav .nav-link:hover {
+        color: #ffd700; /* Màu vàng khi hover */
+    }
+
+    /* Icon trong menu */
+    .navbar-nav .nav-link i {
+        font-size: 18px;
+    }
+
+/* Active menu */
+.navbar-nav .nav-item.active .nav-link {
+    background-color: #e36712;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+/* Responsive: Căn giữa menu trên mobile */
+@media (max-width: 992px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+        .navbar-nav .nav-item {
+            margin-bottom: 5px;
+        }
+}

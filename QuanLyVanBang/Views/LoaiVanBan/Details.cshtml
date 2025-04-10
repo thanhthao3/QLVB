@@ -1,0 +1,44 @@
+﻿@model QuanLyVanBang.Models.LoaiVanBan
+
+@{
+    ViewData["Title"] = "Chi tiết loại văn bản";
+}
+
+<h1>Chi tiết loại văn bản</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã loại văn bản</dt>
+        <dd class="col-sm-9">@Model.MaLoaiVanBan</dd>
+        
+        <dt class="col-sm-3">Tên loại văn bản</dt>
+        <dd class="col-sm-9">@Model.TenLoai</dd>
+        
+        <dt class="col-sm-3">Ký hiệu</dt>
+        <dd class="col-sm-9">@Model.KiHieu</dd>
+        
+        <dt class="col-sm-3">Mô tả</dt>
+        <dd class="col-sm-9">@Model.MoTa</dd>
+    </dl>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.MaLoaiVanBan" class="btn btn-primary">Sửa</a>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenLoai)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenLoai)
+        </dd>
+        <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.KiHieu)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.KiHieu)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.MaLoaiVanBan">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

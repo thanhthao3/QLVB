@@ -1,0 +1,44 @@
+@model IEnumerable<QuanLyVanBang.Models.VanBanDi>
+
+@{
+    ViewData["Title"] = "Danh sách văn bản đi";
+}
+
+<h1>Danh sách văn bản đi</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.SoHieuVanBan)</th>
+            <th>@Html.DisplayNameFor(model => model.TrichYeu)</th>
+            <th>@Html.DisplayNameFor(model => model.MaLoaiVanBan)</th>
+            <th>@Html.DisplayNameFor(model => model.DoKhan)</th>
+            <th>@Html.DisplayNameFor(model => model.DonViBanHanh)</th>
+            <th>@Html.DisplayNameFor(model => model.NgayGui)</th>
+            <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SoHieuVanBan)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrichYeu)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaLoaiVanBan)</td>
+                <td>@Html.DisplayFor(modelItem => item.DoKhan)</td>
+                <td>@Html.DisplayFor(modelItem => item.DonViBanHanh)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgayGui)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrangThai)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaVanBanDi" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.MaVanBanDi" class="btn btn-info btn-sm">Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaVanBanDi" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 

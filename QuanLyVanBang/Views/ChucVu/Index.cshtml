@@ -1,0 +1,36 @@
+@model IEnumerable<QuanLyVanBang.Models.ChucVu>
+
+@{
+    ViewData["Title"] = "Danh sách chức vụ";
+}
+
+<h1>Danh sách chức vụ</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.TenChucVu)</th>
+            <th>@Html.DisplayNameFor(model => model.KiHieu)</th>
+            <th>@Html.DisplayNameFor(model => model.MoTa)</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TenChucVu)</td>
+                <td>@Html.DisplayFor(modelItem => item.KiHieu)</td>
+                <td>@Html.DisplayFor(modelItem => item.MoTa)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaChucVu" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.MaChucVu" class="btn btn-info btn-sm">Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaChucVu" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 

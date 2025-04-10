@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - QuanLyVanBang</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/QuanLyVanBang.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- CSS cho menu -->
+    <link rel="stylesheet" href="~/css/menu.css" asp-append-version="true" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/vi.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-graduation-cap"></i> QuanLyVanBang
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="DonVi" asp-action="Index">
+                                <i class="fas fa-building"></i> Đơn vị
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="ChucVu" asp-action="Index">
+                                <i class="fas fa-user-tie"></i> Chức vụ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="LoaiVanBan" asp-action="Index">
+                                <i class="fas fa-file-alt"></i> Loại văn bản
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="VanBanDi" asp-action="Index">
+                                <i class="fas fa-paper-plane"></i> Văn bản đi
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="VanBanDen" asp-action="Index">
+                                <i class="fas fa-envelope-open-text"></i> Văn bản đến
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="LichSuXuLy" asp-action="Index">
+                                <i class="fas fa-history"></i> Lịch sử xử lý
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="NguoiDung" asp-action="Index">
+                                <i class="fas fa-users-cog"></i> Người Dùng
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fas fa-user"></i> Tài khoản
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                @if (ViewBag.IsLogin == true)
+                                {
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="TaiKhoan" asp-action="Logout">
+                                            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="TaiKhoan" asp-action="Login">
+                                            <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle position-relative" href="#" id="thongBaoDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-bell"></i>
+                                <span id="thongBaoCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+                                    0
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" style="width: 300px;">
+                                <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
+                                    <h6 class="mb-0">Thông báo</h6>
+                                    <a href="/ThongBao" class="text-decoration-none">Xem tất cả</a>
+                                </div>
+                                <div id="thongBaoList" class="overflow-auto" style="max-height: 300px;">
+                                    <!-- Thông báo được cập nhật qua JavaScript -->
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - QuanLyVanBang - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Cập nhật số thông báo và danh sách thông báo mỗi 30 giây
+            function capNhatThongBao() {
+                // Lấy số thông báo chưa xem
+                $.get('/ThongBao/LaySoThongBaoChuaXem', function (response) {
+                    var count = response.count;
+                    $('#thongBaoCount').text(count);
+                    if (count > 0) {
+                        $('#thongBaoCount').show();
+                    } else {
+                        $('#thongBaoCount').hide();
+                    }
+                });
+
+                // Lấy danh sách thông báo mới nhất
+                $.get('/ThongBao/LayThongBaoMoiNhat', function (thongBaos) {
+                    var $thongBaoList = $('#thongBaoList');
+                    $thongBaoList.empty();
+
+                    if (thongBaos.length === 0) {
+                        $thongBaoList.append(`
+                            <div class="text-center py-3">
+                                <i class="fas fa-bell-slash text-muted"></i>
+                                <p class="text-muted mb-0">Không có thông báo mới</p>
+                            </div>
+                        `);
+                    } else {
+                        thongBaos.forEach(function (thongBao) {
+                            var icon = '';
+                            switch (thongBao.loaiThongBao) {
+                                case 1:
+                                    icon = '<i class="fas fa-envelope text-primary"></i>';
+                                    break;
+                                case 2:
+                                    icon = '<i class="fas fa-check-circle text-success"></i>';
+                                    break;
+                                case 3:
+                                    icon = '<i class="fas fa-times-circle text-danger"></i>';
+                                    break;
+                            }
+
+                            var html = `
+                                <a href="${thongBao.duongDanVanBan || '#'}" class="dropdown-item py-2 border-bottom" data-id="${thongBao.maThongBao}">
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-2">${icon}</div>
+                                        <div class="flex-grow-1">
+                                            <p class="mb-0 text-wrap">${thongBao.noiDung}</p>
+                                            <small class="text-muted">${moment(thongBao.ngayTao).fromNow()}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            `;
+                            $thongBaoList.append(html);
+                        });
+                    }
+                });
+            }
+
+            // Cập nhật thông báo lần đầu và mỗi 30 giây
+            capNhatThongBao();
+            setInterval(capNhatThongBao, 30000);
+
+            // Đánh dấu đã xem khi click vào thông báo
+            $(document).on('click', '#thongBaoList .dropdown-item', function () {
+                var thongBaoId = $(this).data('id');
+                $.post('/ThongBao/DanhDauDaXem/' + thongBaoId);
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,73 @@
+@model QuanLyVanBang.Models.VanBanDen
+
+@{
+    ViewData["Title"] = "Thêm mới văn bản đến";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Thêm mới văn bản đến</h2>
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Thông tin văn bản -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">Thông tin văn bản</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label asp-for="MaVanBanDi" class="form-label">Mã văn bản đi</label>
+                                    <select asp-for="MaVanBanDi" class="form-control" required>
+                                        <option value="">Chọn văn bản đi</option>
+                                        @foreach (var item in ViewBag.VanBanDis)
+                                        {
+                                            <option value="@item.MaVanBanDi">@item.SoHieuVanBan - @item.TrichYeu</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="MaVanBanDi" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="NguoiNhan" class="form-label">Người nhận</label>
+                                    <select asp-for="NguoiNhan" class="form-control" required>
+                                        <option value="">Chọn người nhận</option>
+                                        @foreach (var item in ViewBag.NguoiDungs)
+                                        {
+                                            <option value="@item.MaNguoiDung">@item.HoTen</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="NguoiNhan" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="TrangThai" class="form-label">Trạng thái</label>
+                                    <select asp-for="TrangThai" class="form-control" required>
+                                        <option value="">Chọn trạng thái</option>
+                                        <option value="1">Chờ xử lý</option>
+                                        <option value="2">Đang xử lý</option>
+                                        <option value="3">Đã xử lý</option>
+                                    </select>
+                                    <span asp-validation-for="TrangThai" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nút thao tác -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

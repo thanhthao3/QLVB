@@ -1,0 +1,36 @@
+@model QuanLyVanBang.Models.ProcessConfirmViewModel
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Xác nhận xử lý văn bản</h5>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-warning">
+            <strong>Lưu ý:</strong> Sau khi xử lý, bạn sẽ không thể thay đổi trạng thái của văn bản này.
+        </div>
+        
+        <div class="form-group">
+            <label>Số hiệu văn bản:</label>
+            <p class="form-control-static">@Model.SoHieuVanBan</p>
+        </div>
+        
+        <div class="form-group">
+            <label>Trích yếu:</label>
+            <p class="form-control-static">@Model.TrichYeu</p>
+        </div>
+        
+        <div class="form-group">
+            <label>Người gửi:</label>
+            <p class="form-control-static">@Model.NguoiGui</p>
+        </div>
+        
+        <div class="form-group">
+            <label>Ngày gửi:</label>
+            <p class="form-control-static">@Model.NgayGui.ToString("dd/MM/yyyy HH:mm")</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="@Url.Action("Process", new { id = Model.MaVanBanDen })" class="btn btn-primary">Tiếp tục xử lý</a>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Quay lại</a>
+    </div>
+</div> 

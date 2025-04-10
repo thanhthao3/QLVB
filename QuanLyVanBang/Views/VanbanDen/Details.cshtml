@@ -1,0 +1,52 @@
+@model QuanLyVanBang.Models.VanBanDen
+
+@{
+    ViewData["Title"] = "Chi tiết văn bản đến";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Chi tiết văn bản đến</h2>
+
+            <div class="card">
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Mã văn bản đến</dt>
+                        <dd class="col-sm-9">@Model.MaVanBanDen</dd>
+                        
+                        <dt class="col-sm-3">Mã văn bản đi</dt>
+                        <dd class="col-sm-9">@Model.MaVanBanDi</dd>
+                        
+                        <dt class="col-sm-3">Người nhận</dt>
+                        <dd class="col-sm-9">@Model.NguoiNhan</dd>
+                        
+                        <dt class="col-sm-3">Trạng thái</dt>
+                        <dd class="col-sm-9">
+                            @switch (Model.TrangThai)
+                            {
+                                case 1:
+                                    <span class="badge bg-warning">Chờ xử lý</span>
+                                    break;
+                                case 2:
+                                    <span class="badge bg-info">Đang xử lý</span>
+                                    break;
+                                case 3:
+                                    <span class="badge bg-success">Đã xử lý</span>
+                                    break;
+                                default:
+                                    <span class="badge bg-secondary">Không xác định</span>
+                                    break;
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.MaVanBanDen" class="btn btn-primary">Sửa</a>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div> 

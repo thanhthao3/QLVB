@@ -1,0 +1,40 @@
+@model QuanLyVanBang.Models.LichSuXuLy
+
+@{
+    ViewData["Title"] = "Xóa lịch sử xử lý";
+}
+
+<h1>Xóa lịch sử xử lý</h1>
+
+<h3>Bạn có chắc chắn muốn xóa lịch sử xử lý này?</h3>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã lịch sử xử lý</dt>
+        <dd class="col-sm-9">@Model.MaLichSuXuLy</dd>
+        
+        <dt class="col-sm-3">Mã văn bản đi</dt>
+        <dd class="col-sm-9">@Model.MaVanBanDi</dd>
+        
+        <dt class="col-sm-3">Ngày duyệt</dt>
+        <dd class="col-sm-9">@Model.NgayDuyet.ToString("dd/MM/yyyy HH:mm")</dd>
+        
+        <dt class="col-sm-3">Mã người duyệt</dt>
+        <dd class="col-sm-9">@Model.MaNguoiDuyet</dd>
+        
+        <dt class="col-sm-3">Bước</dt>
+        <dd class="col-sm-9">@Model.Buoc</dd>
+        
+        <dt class="col-sm-3">Nhận xét</dt>
+        <dd class="col-sm-9">@Model.NhanXet</dd>
+        
+        <dt class="col-sm-3">Trạng thái</dt>
+        <dd class="col-sm-9">@Model.TrangThai</dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaLichSuXuLy" />
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div> 

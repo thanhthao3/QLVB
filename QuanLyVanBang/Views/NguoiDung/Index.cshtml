@@ -1,0 +1,44 @@
+@model IEnumerable<QuanLyVanBang.Models.NguoiDung>
+
+@{
+    ViewData["Title"] = "Danh sách người dùng";
+}
+
+<h1>Danh sách người dùng</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MaNguoiDung)</th>
+            <th>@Html.DisplayNameFor(model => model.HoTen)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.SDT)</th>
+            <th>@Html.DisplayNameFor(model => model.MaChucVu)</th>
+            <th>@Html.DisplayNameFor(model => model.MaDonVi)</th>
+            <th>@Html.DisplayNameFor(model => model.Role)</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MaNguoiDung)</td>
+                <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.SDT)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaChucVu)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaDonVi)</td>
+                <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaNguoiDung" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.MaNguoiDung" class="btn btn-info btn-sm">Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaNguoiDung" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 

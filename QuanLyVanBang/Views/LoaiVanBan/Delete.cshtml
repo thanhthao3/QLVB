@@ -1,0 +1,31 @@
+﻿@model QuanLyVanBang.Models.LoaiVanBan
+
+@{
+    ViewData["Title"] = "Xóa loại văn bản";
+}
+
+<h1>Xóa loại văn bản</h1>
+
+<h3>Bạn có chắc chắn muốn xóa loại văn bản này?</h3>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã loại văn bản</dt>
+        <dd class="col-sm-9">@Model.MaLoaiVanBan</dd>
+        
+        <dt class="col-sm-3">Tên loại văn bản</dt>
+        <dd class="col-sm-9">@Model.TenLoai</dd>
+        
+        <dt class="col-sm-3">Ký hiệu</dt>
+        <dd class="col-sm-9">@Model.KiHieu</dd>
+        
+        <dt class="col-sm-3">Mô tả</dt>
+        <dd class="col-sm-9">@Model.MoTa</dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaLoaiVanBan" />
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>

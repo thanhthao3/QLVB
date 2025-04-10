@@ -1,0 +1,52 @@
+@model QuanLyVanBang.Models.VanBanDi
+
+@{
+    ViewData["Title"] = "Chi tiết văn bản đi";
+}
+
+<h1>Chi tiết văn bản đi</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Mã văn bản đi</dt>
+        <dd class="col-sm-9">@Model.MaVanBanDi</dd>
+        
+        <dt class="col-sm-3">Số hiệu văn bản</dt>
+        <dd class="col-sm-9">@Model.SoHieuVanBan</dd>
+        
+        <dt class="col-sm-3">Trích yếu</dt>
+        <dd class="col-sm-9">@Model.TrichYeu</dd>
+        
+        <dt class="col-sm-3">Mã loại văn bản</dt>
+        <dd class="col-sm-9">@Model.MaLoaiVanBan</dd>
+        
+        <dt class="col-sm-3">Độ khẩn</dt>
+        <dd class="col-sm-9">@Model.DoKhan</dd>
+        
+        <dt class="col-sm-3">Đơn vị ban hành</dt>
+        <dd class="col-sm-9">@Model.DonViBanHanh</dd>
+        
+        <dt class="col-sm-3">Tệp đính kèm</dt>
+        <dd class="col-sm-9">@Model.TepDinhKem</dd>
+        
+        <dt class="col-sm-3">Năm</dt>
+        <dd class="col-sm-9">@Model.Nam</dd>
+        
+        <dt class="col-sm-3">Ngày gửi</dt>
+        <dd class="col-sm-9">@Model.NgayGui.ToString("dd/MM/yyyy HH:mm")</dd>
+        
+        <dt class="col-sm-3">Ghi chú</dt>
+        <dd class="col-sm-9">@Model.GhiChu</dd>
+        
+        <dt class="col-sm-3">Mã người gửi</dt>
+        <dd class="col-sm-9">@Model.MaNguoiGui</dd>
+        
+        <dt class="col-sm-3">Trạng thái</dt>
+        <dd class="col-sm-9">@Model.TrangThai</dd>
+    </dl>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.MaVanBanDi" class="btn btn-primary">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div> 

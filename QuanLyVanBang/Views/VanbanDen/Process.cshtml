@@ -1,0 +1,187 @@
+@model QuanLyVanBang.Models.VanBanDen
+@{
+    ViewData["Title"] = "Xử lý văn bản đến";
+    var lichSuXuLy = (LichSuXuLy)ViewBag.LichSuXuLy;
+    var isLastStep = (bool)ViewBag.IsLastStep;
+    var nextPerson = ViewBag.NextPerson as NguoiDung;
+}
+
+<div class="container-fluid">
+    <h2 class="text-center mb-4">Xử lý văn bản đến</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Thông tin văn bản</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Số hiệu văn bản:</dt>
+                        <dd class="col-sm-8">@Model.VanBanDi.SoHieuVanBan</dd>
+
+                        <dt class="col-sm-4">Trích yếu:</dt>
+                        <dd class="col-sm-8">@Model.VanBanDi.TrichYeu</dd>
+
+                        <dt class="col-sm-4">Loại văn bản:</dt>
+                        <dd class="col-sm-8">@Model.VanBanDi.LoaiVanBan.TenLoai</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Người gửi:</dt>
+                        <dd class="col-sm-8">@Model.VanBanDi.NguoiGui.HoTen</dd>
+
+                        <dt class="col-sm-4">Ngày gửi:</dt>
+                        <dd class="col-sm-8">@Model.VanBanDi.NgayGui.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                        <dt class="col-sm-4">Độ khẩn:</dt>
+                        <dd class="col-sm-8">
+                            @switch (Model.VanBanDi.DoKhan)
+                            {
+                                case 1:
+                                    <span class="badge bg-success">Bình thường</span>
+                                    break;
+                                case 2:
+                                    <span class="badge bg-warning">Khẩn</span>
+                                    break;
+                                case 3:
+                                    <span class="badge bg-danger">Hỏa tốc</span>
+                                    break;
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.VanBanDi.TepDinhKem))
+            {
+                <div class="mt-3">
+                    <strong>Tệp đính kèm:</strong>
+                    <a href="/uploads/@Model.VanBanDi.TepDinhKem" target="_blank" class="btn btn-link">
+                        <i class="fas fa-file"></i> @Model.VanBanDi.TepDinhKem
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <form asp-action="Process" method="post">
+        <input type="hidden" asp-for="MaVanBanDen" />
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Xử lý văn bản</h5>
+            </div>
+            <div class="card-body">
+                @if (!isLastStep && nextPerson != null)
+                {
+                    <div class="alert alert-info mb-3">
+                        <i class="fas fa-info-circle"></i> Sau khi bạn duyệt, văn bản sẽ được chuyển đến <strong>@nextPerson.HoTen</strong> để xử lý tiếp theo.
+                    </div>
+                }
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Nhận xét:</label>
+                        <textarea name="nhanXet" class="form-control" rows="3" required>@lichSuXuLy.NhanXet</textarea>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Trạng thái:</label>
+                        <select name="trangThai" class="form-select" required>
+                            <option value="1">Đợi duyệt</option>
+                            <option value="2" selected>Chưa duyệt</option>
+                            <option value="3">Đã duyệt</option>
+                            <option value="4">Từ chối</option>
+                        </select>
+                    </div>
+                </div>
+
+                @if (isLastStep)
+                {
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <h6>Chọn người nhận tiếp theo:</h6>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50px;">
+                                                <input type="checkbox" id="selectAll" class="form-check-input" />
+                                            </th>
+                                            <th>Mã người dùng</th>
+                                            <th>Họ tên</th>
+                                            <th>Đơn vị</th>
+                                            <th>Chức vụ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var nguoiDung in (List<NguoiDung>)ViewBag.NguoiDung)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="nguoiNhanIds" value="@nguoiDung.MaNguoiDung" class="form-check-input nguoi-nhan" />
+                                                </td>
+                                                <td>@nguoiDung.MaNguoiDung</td>
+                                                <td>@nguoiDung.HoTen</td>
+                                                <td>@nguoiDung.DonVi.TenDonVi</td>
+                                                <td>@nguoiDung.ChucVu.TenChucVu</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Lưu thay đổi
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Xử lý chọn tất cả
+            $("#selectAll").change(function () {
+                $(".nguoi-nhan").prop('checked', $(this).prop('checked'));
+            });
+
+            // Cập nhật trạng thái "Chọn tất cả" khi thay đổi các checkbox con
+            $(".nguoi-nhan").change(function () {
+                $("#selectAll").prop('checked', $(".nguoi-nhan:checked").length === $(".nguoi-nhan").length);
+            });
+
+            // Xử lý khi chọn trạng thái
+            $("select[name='trangThai']").change(function() {
+                var selectedValue = $(this).val();
+                if (selectedValue == "4") { // Từ chối
+                    $(".nguoi-nhan").prop('checked', false);
+                    $(".nguoi-nhan").prop('disabled', true);
+                    $("#selectAll").prop('disabled', true);
+                } else {
+                    $(".nguoi-nhan").prop('disabled', false);
+                    $("#selectAll").prop('disabled', false);
+                }
+            });
+        });
+    </script>
+} 

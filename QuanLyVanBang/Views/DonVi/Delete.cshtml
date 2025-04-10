@@ -1,0 +1,24 @@
+﻿@model QuanLyVanBang.Models.DonVi
+
+@{
+    ViewData["Title"] = "Xóa đơn vị";
+}
+
+<h1>Xóa đơn vị</h1>
+
+<h3>Bạn có chắc chắn muốn xóa đơn vị này?</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.TenDonVi)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.TenDonVi)</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.KiHieu)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.KiHieu)</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.MoTa)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.MoTa)</dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaDonVi" />
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>

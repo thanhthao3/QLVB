@@ -1,0 +1,203 @@
+@model QuanLyVanBang.Models.VanBanDi
+
+@{
+    ViewData["Title"] = "Thêm mới văn bản đi";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Thêm mới văn bản đi</h2>
+
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Thông tin văn bản đi -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Thông tin văn bản đi</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="SoHieuVanBan" class="form-label"></label>
+                                    <input asp-for="SoHieuVanBan" class="form-control" />
+                                    <span asp-validation-for="SoHieuVanBan" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="MaLoaiVanBan" class="form-label"></label>
+                                    <select asp-for="MaLoaiVanBan" class="form-select">
+                                        @if(ViewBag.LoaiVanBan != null)
+                                        {
+                                            @foreach (var item in ViewBag.LoaiVanBan)
+                                            {
+                                                <option value="@item.MaLoaiVanBan">@item.TenLoai</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span asp-validation-for="MaLoaiVanBan" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="DoKhan" class="form-label"></label>
+                                    <select asp-for="DoKhan" class="form-select">
+                                        <option value="1">Thường</option>
+                                        <option value="2">Khẩn</option>
+                                        <option value="3">Hỏa tốc</option>
+                                    </select>
+                                    <span asp-validation-for="DoKhan" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="DonViBanHanh" class="form-label"></label>
+                                    <select asp-for="DonViBanHanh" class="form-select">
+                                        @if(ViewBag.DonViBanHanh != null)
+                                        {
+                                            @foreach (var item in ViewBag.DonViBanHanh)
+                                            {
+                                                <option value="@item.MaDonVi">@item.TenDonVi</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span asp-validation-for="DonViBanHanh" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Nam" class="form-label"></label>
+                                    <select asp-for="Nam" class="form-select">
+                                        @{
+                                            int currentYear = DateTime.Now.Year;
+                                            for (int year = currentYear - 5; year <= currentYear + 5; year++)
+                                            {
+                                                <option value="@year">@year</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span asp-validation-for="Nam" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="NgayGui" class="form-label"></label>
+                                    <input type="datetime-local" asp-for="NgayGui" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                                    <span asp-validation-for="NgayGui" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="TepDinhKem" class="form-label"></label>
+                                    <input asp-for="TepDinhKem" class="form-control" type="file" />
+                                    <span asp-validation-for="TepDinhKem" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="GhiChu" class="form-label"></label>
+                                    <textarea asp-for="GhiChu" class="form-control" rows="2"></textarea>
+                                    <span asp-validation-for="GhiChu" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <label asp-for="TrichYeu" class="form-label"></label>
+                                    <textarea asp-for="TrichYeu" class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="TrichYeu" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lịch sử xử lý -->
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Lịch sử xử lý</h5>
+                        <button type="button" class="btn btn-light btn-sm" onclick="addLichSuXuLy()">
+                            <i class="fas fa-plus"></i> Thêm bước xử lý
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="lichSuXuLyContainer">
+                            <!-- Template cho lịch sử xử lý -->
+                            <div class="lich-su-xu-ly-item border rounded p-3 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="mb-0">Bước xử lý</h6>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeItem(this)">
+                                        <i class="fas fa-trash"></i> Xóa
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Người duyệt</label>
+                                            <select name="LichSuXuLys[0].MaNguoiDuyet" class="form-select">
+                                                @if(ViewBag.NguoiDung != null)
+                                                {
+                                                    @foreach (var item in ViewBag.NguoiDung)
+                                                    {
+                                                        <option value="@item.MaNguoiDung">@item.HoTen - @item.ChucVu.TenChucVu</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Bước</label>
+                                            <input type="number" name="LichSuXuLys[0].Buoc" class="form-control" value="1" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Lưu
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        let lichSuXuLyCount = 1;
+
+        function addLichSuXuLy() {
+            const container = document.getElementById('lichSuXuLyContainer');
+            const template = container.querySelector('.lich-su-xu-ly-item').cloneNode(true);
+            
+            // Cập nhật index trong name attributes
+            template.querySelectorAll('[name]').forEach(input => {
+                input.name = input.name.replace('[0]', `[${lichSuXuLyCount}]`);
+            });
+            
+            // Reset values
+            template.querySelectorAll('input, textarea').forEach(input => {
+                if (input.type === 'datetime-local') {
+                    input.value = new Date().toISOString().slice(0, 16);
+                } else {
+                    input.value = '';
+                }
+            });
+            
+            container.appendChild(template);
+            lichSuXuLyCount++;
+        }
+
+        function removeItem(button) {
+            // Xác nhận trước khi xóa
+            if (confirm('Bạn có chắc chắn muốn xóa mục này?')) {
+                // Lấy phần tử cha (div chứa toàn bộ item)
+                const item = button.closest('.lich-su-xu-ly-item');
+                if (item) {
+                    item.remove();
+                }
+            }
+        }
+    </script>
+} 

@@ -1,0 +1,84 @@
+@model IEnumerable<QuanLyVanBang.Models.VanBanDen>
+
+@{
+    ViewData["Title"] = "Danh sách văn bản đến";
+}
+
+<div class="container-fluid">
+    <h2 class="text-center mb-4">Danh sách văn bản đến</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Số hiệu văn bản</th>
+                            <th>Trích yếu</th>
+                            <th>Người gửi</th>
+                            <th>Ngày gửi</th>
+                            <th>Độ khẩn</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.VanBanDi.SoHieuVanBan</td>
+                                <td>@item.VanBanDi.TrichYeu</td>
+                                <td>@item.VanBanDi.NguoiGui.HoTen</td>
+                                <td>@item.VanBanDi.NgayGui.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    @switch (item.VanBanDi.DoKhan)
+                                    {
+                                        case 1:
+                                            <span class="badge bg-success">Bình thường</span>
+                                            break;
+                                        case 2:
+                                            <span class="badge bg-warning">Khẩn</span>
+                                            break;
+                                        case 3:
+                                            <span class="badge bg-danger">Hỏa tốc</span>
+                                            break;
+                                    }
+                                </td>
+                                <td>
+                                    @switch (item.TrangThai)
+                                    {
+                                        case 1:
+                                            <span class="badge bg-warning">Đợi duyệt</span>
+                                            break;
+                                        case 2:
+                                            <span class="badge bg-info">Chưa duyệt</span>
+                                            break;
+                                        case 3:
+                                            <span class="badge bg-success">Đã duyệt</span>
+                                            break;
+                                        default:
+                                            <span class="badge bg-secondary">Không xác định</span>
+                                            break;
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a asp-action="Details" asp-route-id="@item.MaVanBanDen" class="btn btn-sm btn-info" title="Chi tiết">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                        @if (item.TrangThai != 3) // Chỉ hiển thị nút xử lý khi chưa duyệt
+                                        {
+                                            <a asp-action="Process" asp-route-id="@item.MaVanBanDen" class="btn btn-sm btn-primary" title="Xử lý">
+                                                <i class="fas fa-check-circle"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> 
