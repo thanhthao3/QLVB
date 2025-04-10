@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\NewFolder\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

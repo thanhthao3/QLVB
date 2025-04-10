@@ -1,103 +1,169 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QuanLyVanBang</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/QuanLyVanBang.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <!-- CSS cho menu -->
-    <link rel="stylesheet" href="~/css/menu.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@ViewData["Title"] - QuanLyVanBan</title>
+    <link rel="icon" type="image/x-icon" href="~/img/DNU.png">
+
+    <!-- Custom fonts -->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    @* <link rel="stylesheet" href="~/QuanLyVanBang.styles.css" asp-append-version="true"> *@
+    <link rel="stylesheet" href="~/css/menu.css" asp-append-version="true">
+
+    <!-- Moment.js for notifications -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/vi.js"></script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="fas fa-graduation-cap"></i> QuanLyVanBang
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-action="Index" asp-controller="Home">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">QuanLyVanBan</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Home -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                                <i class="fas fa-home"></i> Home
+            </li>
+
+            <!-- Nav Item - Đơn vị -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="DonVi" asp-action="Index">
+                    <i class="fas fa-building"></i>
+                    <span>Đơn vị</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Chức vụ -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="ChucVu" asp-action="Index">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Chức vụ</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Loại văn bản -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="LoaiVanBan" asp-action="Index">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Loại văn bản</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Văn bản đi -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="VanBanDi" asp-action="Index">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Văn bản đi</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Văn bản đến -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="VanBanDen" asp-action="Index">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <span>Văn bản đến</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Lịch sử xử lý -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="LichSuXuLy" asp-action="Index">
+                    <i class="fas fa-history"></i>
+                    <span>Lịch sử xử lý</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Người Dùng -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="NguoiDung" asp-action="Index">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Người Dùng</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-warning bg-gradient-warning" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
                             </a>
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-warning" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="DonVi" asp-action="Index">
-                                <i class="fas fa-building"></i> Đơn vị
+
+                        <!-- Nav Item - Notifications -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle position-relative" href="#" id="thongBaoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <span id="thongBaoCount" class="badge badge-danger badge-counter" style="display: none;">0</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="ChucVu" asp-action="Index">
-                                <i class="fas fa-user-tie"></i> Chức vụ
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="LoaiVanBan" asp-action="Index">
-                                <i class="fas fa-file-alt"></i> Loại văn bản
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="VanBanDi" asp-action="Index">
-                                <i class="fas fa-paper-plane"></i> Văn bản đi
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="VanBanDen" asp-action="Index">
-                                <i class="fas fa-envelope-open-text"></i> Văn bản đến
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="LichSuXuLy" asp-action="Index">
-                                <i class="fas fa-history"></i> Lịch sử xử lý
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="NguoiDung" asp-action="Index">
-                                <i class="fas fa-users-cog"></i> Người Dùng
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fas fa-user"></i> Tài khoản
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                @if (ViewBag.IsLogin == true)
-                                {
-                                    <li>
-                                        <a class="dropdown-item" asp-controller="TaiKhoan" asp-action="Logout">
-                                            <i class="fas fa-sign-out-alt"></i> Đăng xuất
-                                        </a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li>
-                                        <a class="dropdown-item" asp-controller="TaiKhoan" asp-action="Login">
-                                            <i class="fas fa-sign-in-alt"></i> Đăng nhập
-                                        </a>
-                                    </li>
-                                }
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle position-relative" href="#" id="thongBaoDropdown" data-bs-toggle="dropdown">
-                                <i class="fas fa-bell"></i>
-                                <span id="thongBaoCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
-                                    0
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" style="width: 300px;">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="thongBaoDropdown" style="width: 300px;">
                                 <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
                                     <h6 class="mb-0">Thông báo</h6>
                                     <a href="/ThongBao" class="text-decoration-none">Xem tất cả</a>
@@ -107,26 +173,71 @@
                                 </div>
                             </div>
                         </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@User.Identity.Name</span>
+                                <i class="fas fa-user fa-fw"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                @if (ViewBag.IsLogin == true)
+                                {
+                                    <a class="dropdown-item" asp-controller="TaiKhoan" asp-action="Logout">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Đăng xuất
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-controller="TaiKhoan" asp-action="Login">
+                                        <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Đăng nhập
+                                    </a>
+                                }
+                            </div>
+                        </li>
                     </ul>
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    @RenderBody()
                 </div>
+                <!-- /.container-fluid -->
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - QuanLyVanBang - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>© 2025 - QuanLyVanBang - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript -->
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for SB Admin 2 -->
+    <script src="~/js/sb-admin-2.min.js"></script>
+
+    <!-- Notification script -->
     <script>
         $(document).ready(function () {
             // Cập nhật số thông báo và danh sách thông báo mỗi 30 giây
@@ -197,6 +308,7 @@
             });
         });
     </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

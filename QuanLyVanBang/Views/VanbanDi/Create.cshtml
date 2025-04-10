@@ -4,18 +4,18 @@
     ViewData["Title"] = "Thêm mới văn bản đi";
 }
 
-<div class="container mt-5">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h2 class="text-center mb-4">Thêm mới văn bản đi</h2>
+            <h3 class="text-center mb-4">Thêm mới văn bản đi</h3>
 
             <form asp-action="Create" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <!-- Thông tin văn bản đi -->
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Thông tin văn bản đi</h5>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-primary text-white">
+                        <h5 class="m-0 font-weight-bold">Thông tin văn bản đi</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -28,7 +28,7 @@
                                 <div class="form-group mb-3">
                                     <label asp-for="MaLoaiVanBan" class="form-label"></label>
                                     <select asp-for="MaLoaiVanBan" class="form-select">
-                                        @if(ViewBag.LoaiVanBan != null)
+                                        @if (ViewBag.LoaiVanBan != null)
                                         {
                                             @foreach (var item in ViewBag.LoaiVanBan)
                                             {
@@ -50,7 +50,7 @@
                                 <div class="form-group mb-3">
                                     <label asp-for="DonViBanHanh" class="form-label"></label>
                                     <select asp-for="DonViBanHanh" class="form-select">
-                                        @if(ViewBag.DonViBanHanh != null)
+                                        @if (ViewBag.DonViBanHanh != null)
                                         {
                                             @foreach (var item in ViewBag.DonViBanHanh)
                                             {
@@ -105,9 +105,9 @@
                 </div>
 
                 <!-- Lịch sử xử lý -->
-                <div class="card mb-4">
-                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Lịch sử xử lý</h5>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-success text-white d-flex justify-content-between align-items-center">
+                        <h5 class="m-0 font-weight-bold">Lịch sử xử lý</h5>
                         <button type="button" class="btn btn-light btn-sm" onclick="addLichSuXuLy()">
                             <i class="fas fa-plus"></i> Thêm bước xử lý
                         </button>
@@ -127,7 +127,7 @@
                                         <div class="form-group mb-3">
                                             <label class="form-label">Người duyệt</label>
                                             <select name="LichSuXuLys[0].MaNguoiDuyet" class="form-select">
-                                                @if(ViewBag.NguoiDung != null)
+                                                @if (ViewBag.NguoiDung != null)
                                                 {
                                                     @foreach (var item in ViewBag.NguoiDung)
                                                     {
@@ -150,10 +150,10 @@
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary btn-lg">
                         <i class="fas fa-save"></i> Lưu
                     </button>
-                    <a asp-action="Index" class="btn btn-secondary">
+                    <a asp-action="Index" class="btn btn-secondary btn-lg">
                         <i class="fas fa-arrow-left"></i> Quay lại
                     </a>
                 </div>
@@ -163,19 +163,21 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script>
         let lichSuXuLyCount = 1;
 
         function addLichSuXuLy() {
             const container = document.getElementById('lichSuXuLyContainer');
             const template = container.querySelector('.lich-su-xu-ly-item').cloneNode(true);
-            
+
             // Cập nhật index trong name attributes
             template.querySelectorAll('[name]').forEach(input => {
                 input.name = input.name.replace('[0]', `[${lichSuXuLyCount}]`);
             });
-            
+
             // Reset values
             template.querySelectorAll('input, textarea').forEach(input => {
                 if (input.type === 'datetime-local') {
@@ -184,7 +186,7 @@
                     input.value = '';
                 }
             });
-            
+
             container.appendChild(template);
             lichSuXuLyCount++;
         }
@@ -200,4 +202,4 @@
             }
         }
     </script>
-} 
+}
